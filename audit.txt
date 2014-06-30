@@ -1,0 +1,93 @@
+{
+"ID": 2618525,
+"ArtifactID": 2437034,
+"Name": "ralson",
+"ObjectType": "SearchTermsResult",
+"ObjectTypeID": 1000007,
+"Action": 9,
+"ActionName": "Delete",
+"UserID": 1015556,
+"UserName": "Account, Automation",
+"TimeStamp": "2013-08-08T17:42:21.11",
+"Details": {
+"auditElement": {
+"field": [
+{
+"@id": "1035320",
+"@type": "0",
+"@name": "Name",
+"@formatstring": "",
+"oldValue": "ralson"
+},
+{
+"@id": "1035321",
+"@type": "10",
+"@name": "SearchTermsReport",
+"@formatstring": "",
+"oldValue": "2433854"
+},
+{
+"@id": "1035333",
+"@type": "1",
+"@name": "Count",
+"@formatstring": "",
+"oldValue": "9"
+},
+{
+"@id": "1035334",
+"@type": "0",
+"@name": "Status",
+"@formatstring": "",
+"oldValue": "Completed"
+},
+{
+"@id": "1035335",
+"@type": "4",
+"@name": "Error Message",
+"@formatstring": "",
+"oldValue": ""
+},
+{
+"@id": "1036669",
+"@type": "0",
+"@name": "Relativity Highlight Color",
+"@formatstring": "",
+"oldValue": ""
+},
+{
+"@id": "2267788",
+"@type": "2",
+"@name": "Last Run Time",
+"@formatstring": "g",
+"oldValue": "2013-08-08 12:26:50"
+},
+{
+"@id": "2267789",
+"@type": "1",
+"@name": "Count w/ Group",
+"@formatstring": "",
+"oldValue": "0"
+}
+]
+}
+},
+"RequestOrigination": {
+"auditElement": {
+"RequestOrigination": {
+"IP": "172.16.39.247",
+"Page": "http://tt-pf5-web01.perf.corp/Relativity/Controls/Confirm.aspx?ArtifactID=1003663&ParentLocation=%2fRelativity%2fControls%2fListTemplateFrames%2fObjectListTemplateFrame.aspx%3fArtifactID%3d1003663%26ArtifactTypeID%3d1000006%26AppID%3d1015491%26QuickSearchCriteria%3d&ConfirmType=delete&ArtifactTypeID=1000006"
+}
+}
+},
+"RecordOrigination": {
+"auditElement": {
+"RecordOrigination": {
+"MAC": "00:50:56:8B:50:5F",
+"IP": "172.16.38.141",
+"Server": "TT-PF5-WEB01"
+}
+}
+},
+"ExecutionTime": null,
+"SessionIdentifier": 1127
+}
