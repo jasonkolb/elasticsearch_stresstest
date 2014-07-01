@@ -1,1 +1,1 @@
-java -classpath datagrid-1.0-SNAPSHOT.jar datagrid.Main -operation partitionTest -data audit.txt -endpoint http://localhost:9200 -number 50000 -sleepmsecs 10 -index test_audit
+java -classpath elasticsearch-stresstest-1.0-SNAPSHOT.jar datagrid.Main -operation partitionTest -data audit.txt -endpoint http://localhost:9200 -number 50000 -sleepmsecs 10 -index test_audit

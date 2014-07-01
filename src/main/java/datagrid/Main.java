@@ -42,12 +42,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static akka.dispatch.Futures.sequence;
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by jkolb on 5/19/2014.
  */
 public class Main
 {
+    static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     long bytesToWriteInLargeFile = 1048576L * 1024 * 10; // 10 GB
     int maximumChunkSizeInBytes = 1048576*5; // 5 MB
@@ -123,7 +126,8 @@ public class Main
             doParititionTest();
         else if( operation.equals("sizeTest") )
             documentSizeTest();
-
+        else
+                throw new CmdLineException(parser,"No operation was provided");
     }
 
     public void doParititionTest() throws Exception {
@@ -156,15 +160,15 @@ public class Main
             try {
                 Index index = new Index.Builder(payload).index(indexName).type(typeName).id(new Integer(i).toString()).build();
                 JestResult x = client.execute(index);
-                System.out.println("Indexing document #" + i + " then sleeping for " + this.sleepmsecs + " msecs");
+                logger.debug("Indexing document #" + i + " then sleeping for " + this.sleepmsecs + " msecs");
                 if( x.isSucceeded() )
                     writtenIds.put(i, "x");
                 else {
-                    System.out.println("Failed to index document " + i);
+                    logger.warn("Failed to index document " + i);
                     failedIds.put(i, "x");
                 }
             } catch( Exception ex ){
-                System.out.println("Failed to index document " + i);
+                logger.error("Failed to index document " + i + " with an error", ex);
 
                 failedIds.put(i, "x");
             }
@@ -188,9 +192,9 @@ public class Main
 
             if( result.isSucceeded() ) {
                 failedWriteVerifications++;
-                System.out.println("Successful write ID " + idToCheck + " verified");
+                logger.debug("Successful write ID " + idToCheck + " verified");
             } else {
-                System.out.println("Successful write ID " + idToCheck + " MISSING!!!!!!!!!!!!!!!!!!!!!");
+                logger.warn("Successful write ID " + idToCheck + " MISSING!!!!!!!!!!!!!!!!!!!!!");
             }
         }
 
@@ -207,19 +211,19 @@ public class Main
 
             if( result.isSucceeded() ) {
                 failedFailureVerifications++;
-                System.out.println("Previously failed write ID " + idToCheck + " was verified (?)");
+                logger.warn("Previously failed write ID " + idToCheck + " was verified (?)");
             } else {
-                System.out.println("Previously failed write ID " + idToCheck + " missing (as expected)");
+                logger.debug("Previously failed write ID " + idToCheck + " missing (as expected)");
             }
         }
 
         Integer verified = total - failedWriteVerifications;
         Double verifiedPercent = verified.doubleValue() / total.doubleValue() * 100;
-        System.out.println("Verified " + verified + " out of " + total + " reported as successful failed: (" + verifiedPercent + "%)");
+        logger.info("Verified " + verified + " out of " + total + " reported as successful failed: (" + verifiedPercent + "%)");
 
         verified = failedTotal - failedFailureVerifications;
         verifiedPercent = verified.doubleValue() / failedTotal.doubleValue() * 100;
-        System.out.println("Verified " + verified + " out of " + failedTotal + " reported as failures failed: (" + verifiedPercent + "%)");
+        logger.info("Verified " + verified + " out of " + failedTotal + " reported as failures failed: (" + verifiedPercent + "%)");
 
     }
 
