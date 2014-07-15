@@ -177,8 +177,9 @@ public class Main
             Thread.sleep(this.sleepmsecs);
         }
 
-        System.out.println("Press enter to start verifying");
+        System.out.println("Press Enter to start verifying");
         System.in.read();
+        System.out.println("Verifying...");
 
         Integer total = writtenIds.size();
         Integer failedWriteVerifications = 0;
@@ -203,6 +204,7 @@ public class Main
         Integer failedFailureVerifications = 0;
 
         // Verify failed
+        int i = 0;
         for( Integer thisId : failedIds.keySet() ){
             String idToCheck = thisId.toString();
 
@@ -215,15 +217,20 @@ public class Main
             } else {
                 logger.debug("Previously failed write ID " + idToCheck + " missing (as expected)");
             }
+
+            if( i % 100 == 0 )
+                logger.debug("Verified record " + i);
+
+            i++;
         }
 
         Integer verified = total - failedWriteVerifications;
         Double verifiedPercent = verified.doubleValue() / total.doubleValue() * 100;
-        logger.info("Verified " + verified + " out of " + total + " reported as successful failed: (" + verifiedPercent + "%)");
+        logger.info("Verification result:  " + verified + " out of " + total + " which were reported as successful failed: (" + verifiedPercent + "%)");
 
         verified = failedTotal - failedFailureVerifications;
         verifiedPercent = verified.doubleValue() / failedTotal.doubleValue() * 100;
-        logger.info("Verified " + verified + " out of " + failedTotal + " reported as failures failed: (" + verifiedPercent + "%)");
+        logger.info("Verification result: " + verified + " out of " + failedTotal + " which reported as failures were actually successfully found (!): (" + verifiedPercent + "%)");
 
     }
 
