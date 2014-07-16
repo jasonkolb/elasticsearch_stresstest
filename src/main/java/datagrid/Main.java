@@ -226,11 +226,11 @@ public class Main
 
         Integer verified = total - failedWriteVerifications;
         Double verifiedPercent = verified.doubleValue() / total.doubleValue() * 100;
-        logger.info("Verification result:  " + verified + " out of " + total + " which were reported as successful failed: (" + verifiedPercent + "%)");
+        logger.info("Verification results Part 1:  " + verified + " out of " + total + " which were reported as successful failed: (" + verifiedPercent + "%)");
 
         verified = failedTotal - failedFailureVerifications;
         verifiedPercent = verified.doubleValue() / failedTotal.doubleValue() * 100;
-        logger.info("Verification result: " + verified + " out of " + failedTotal + " which reported as failures were actually successfully found (!): (" + verifiedPercent + "%)");
+        logger.info("Verification results Part 2: " + verified + " out of " + failedTotal + " which reported as failures were actually successfully found (!): (" + verifiedPercent + "%)");
 
     }
 
