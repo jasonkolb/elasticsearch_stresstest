@@ -25,6 +25,9 @@
         <module name="elasticsearch-stresstest" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="elasticsearch-stresstest" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 
